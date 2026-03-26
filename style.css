@@ -1,0 +1,41 @@
+:root {
+    --bg-color: #f4f1ea;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --border-color: #cccccc;
+    --btn-bg: #e8e5dc;
+    --btn-hover: #d6d3c8;
+    --accent: #8c9c7d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+header {
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+main {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
