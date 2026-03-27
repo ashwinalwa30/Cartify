@@ -1,6 +1,7 @@
 const apiUrl = 'https://dummyjson.com/products?limit=50';
 let products = [];
 const grid = document.getElementById('product-grid');
+const searchInput = document.getElementById('search-input');
 
 async function fetchProducts() {
     try {
@@ -15,12 +16,17 @@ async function fetchProducts() {
 
 function renderProducts() {
     grid.innerHTML = '';
-    if (products.length === 0) {
+    
+    let filtered = products.filter(product => {
+        return product.title.toLowerCase().includes(searchInput.value.toLowerCase());
+    });
+
+    if (filtered.length === 0) {
         grid.innerHTML = '<p>No products found.</p>';
         return;
     }
 
-    products.forEach(product => {
+    filtered.forEach(product => {
         const card = document.createElement('div');
         card.className = 'card';
 
@@ -46,5 +52,7 @@ function renderProducts() {
         grid.appendChild(card);
     });
 }
+
+searchInput.addEventListener('input', renderProducts);
 
 fetchProducts();
