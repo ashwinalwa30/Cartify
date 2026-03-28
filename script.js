@@ -3,6 +3,7 @@ let products = [];
 const grid = document.getElementById('product-grid');
 const searchInput = document.getElementById('search-input');
 const categoryFilter = document.getElementById('category-filter');
+const sortSelect = document.getElementById('sort-select');
 
 async function fetchProducts() {
     try {
@@ -41,6 +42,16 @@ function renderProducts() {
         return matchesSearch && matchesCategory;
     });
 
+    if (sortSelect.value === 'price-asc') {
+        filtered.sort((a, b) => a.price - b.price);
+    } else if (sortSelect.value === 'price-desc') {
+        filtered.sort((a, b) => b.price - a.price);
+    } else if (sortSelect.value === 'name-asc') {
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortSelect.value === 'name-desc') {
+        filtered.sort((a, b) => b.title.localeCompare(a.title));
+    }
+
     if (filtered.length === 0) {
         grid.innerHTML = '<p>No products found.</p>';
         return;
@@ -75,5 +86,6 @@ function renderProducts() {
 
 searchInput.addEventListener('input', renderProducts);
 categoryFilter.addEventListener('change', renderProducts);
+sortSelect.addEventListener('change', renderProducts);
 
 fetchProducts();
