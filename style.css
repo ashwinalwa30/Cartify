@@ -8,6 +8,16 @@
     --accent: #8c9c7d;
 }
 
+body.dark-mode {
+    --bg-color: #2b2b2b;
+    --text-color: #e6e6e6;
+    --card-bg: #3c3c3c;
+    --border-color: #555555;
+    --btn-bg: #4a4a4a;
+    --btn-hover: #5a5a5a;
+    --accent: #a7b897;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;

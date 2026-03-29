@@ -1,9 +1,13 @@
 const apiUrl = 'https://dummyjson.com/products?limit=50';
 let products = [];
+let favorites = JSON.parse(localStorage.getItem('cartify_favorites')) || [];
+let showOnlyFavorites = false;
 const grid = document.getElementById('product-grid');
 const searchInput = document.getElementById('search-input');
 const categoryFilter = document.getElementById('category-filter');
 const sortSelect = document.getElementById('sort-select');
+const favBtn = document.getElementById('favorites-btn');
+const themeBtn = document.getElementById('theme-btn');
 
 async function fetchProducts() {
     try {
@@ -39,7 +43,8 @@ function renderProducts() {
     let filtered = products.filter(product => {
         const matchesSearch = product.title.toLowerCase().includes(searchInput.value.toLowerCase());
         const matchesCategory = categoryFilter.value === 'all' || product.category === categoryFilter.value;
-        return matchesSearch && matchesCategory;
+        const matchesFavorites = !showOnlyFavorites || favorites.includes(product.id);
+        return matchesSearch && matchesCategory && matchesFavorites;
     });
 
     if (sortSelect.value === 'price-asc') {
@@ -76,6 +81,16 @@ function renderProducts() {
         category.className = 'category';
         category.textContent = product.category;
 
+        const button = document.createElement('button');
+        button.className = 'fav-btn';
+        if (favorites.includes(product.id)) {
+            button.classList.add('active');
+            button.textContent = 'Remove Favorite';
+        } else {
+            button.textContent = 'Add Favorite';
+        }
+        button.addEventListener('click', () => toggleFavorite(product.id, button));
+
         card.appendChild(img);
         card.appendChild(title);
         card.appendChild(price);
@@ -84,8 +99,44 @@ function renderProducts() {
     });
 }
 
+function toggleFavorite(id, button) {
+    if (favorites.includes(id)) {
+        favorites = favorites.filter(favId => favId !== id);
+        button.classList.remove('active');
+        button.textContent = 'Add Favorite';
+    } else {
+        favorites.push(id);
+        button.classList.add('active');
+        button.textContent = 'Remove Favorite';
+    }
+    localStorage.setItem('cartify_favorites', JSON.stringify(favorites));
+    if (showOnlyFavorites) {
+        renderProducts();
+    }
+}
+
 searchInput.addEventListener('input', renderProducts);
 categoryFilter.addEventListener('change', renderProducts);
 sortSelect.addEventListener('change', renderProducts);
+
+favBtn.addEventListener('click', () => {
+    showOnlyFavorites = !showOnlyFavorites;
+    if (showOnlyFavorites) {
+        favBtn.textContent = 'Show All Products';
+    } else {
+        favBtn.textContent = 'Show Favorites';
+    }
+    renderProducts();
+});
+
+themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('cartify_theme', isDark ? 'dark' : 'light');
+});
+
+if (localStorage.getItem('cartify_theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+}
 
 fetchProducts();
