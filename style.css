@@ -29,6 +29,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.5;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
@@ -108,6 +109,11 @@ main {
     background-color: white;
     padding: 10px;
     border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+.card:hover img {
+    transform: scale(1.05);
 }
 
 .card h3 {
