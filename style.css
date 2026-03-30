@@ -44,8 +44,105 @@ h1 {
     margin-bottom: 20px;
 }
 
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+input, select, button {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--btn-bg);
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--btn-hover);
+}
+
 main {
     padding: 30px;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.card .price {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: var(--accent);
+}
+
+.card .category {
+    font-size: 13px;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.fav-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--btn-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.fav-btn.active {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
 }
