@@ -59,6 +59,11 @@ input, select, button {
     border-radius: 4px;
     background-color: var(--card-bg);
     color: var(--text-color);
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--accent);
 }
 
 button {
