@@ -10,19 +10,19 @@
     <header>
         <h1>Cartify</h1>
         <div class="controls">
-            <input type="text" id="search-input" placeholder="Search products...">
-            <select id="category-filter">
+            <input type="text" id="search-input" placeholder="Search products..." aria-label="Search products">
+            <select id="category-filter" aria-label="Filter by category">
                 <option value="all">All Categories</option>
             </select>
-            <select id="sort-select">
+            <select id="sort-select" aria-label="Sort products">
                 <option value="default">Sort By</option>
                 <option value="price-asc">Price (Low to High)</option>
                 <option value="price-desc">Price (High to Low)</option>
                 <option value="name-asc">Alphabetical (A - Z)</option>
                 <option value="name-desc">Alphabetical (Z - A)</option>
             </select>
-            <button id="favorites-btn">Show Favorites</button>
-            <button id="theme-btn">Toggle Theme</button>
+            <button id="favorites-btn" aria-label="Toggle favorites view">Show Favorites</button>
+            <button id="theme-btn" aria-label="Toggle dark mode theme">Toggle Theme</button>
         </div>
     </header>
     <main>
